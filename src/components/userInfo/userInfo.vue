@@ -2,7 +2,7 @@
   <div class="user-info">
     <a :href="id">
       <div class="avatar">
-        <img class="img" :src="avatar" alt="user avatar">
+        <img :class="['img', {'bordered': active}]" :src="avatar" alt="user avatar">
       </div>
     </a>
     <div class="username">{{ username }}</div>
@@ -24,6 +24,10 @@ export default {
     avatar: {
       type: String,
       required: true
+    },
+    active: {
+      type: Boolean,
+      required: true
     }
   }
 }
@@ -35,23 +39,29 @@ export default {
     align-items: center;
   }
   .avatar {
-    width: 55px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    margin: 0 auto;
+    overflow: hidden;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding-right: 15px;
+    margin-right: 10px;
   }
   .img {
-    width: 45px;
+    width: 100%;
+    height: 100%;
+    padding: 3px;
+    border: 2px solid transparent;
     border-radius: 50%;
-    &:hover {
-      border-color: transparent;
-    }
+    object-fit: cover;
   }
+
   .username {
     font-size: 18px;
     font-weight: bold;
+  }
+
+  .bordered {
+    border-color: #A6328D;
   }
 </style>

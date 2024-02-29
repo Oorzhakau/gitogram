@@ -66,7 +66,7 @@ export default {
 
 <style lang="scss" scoped>
 .c-feed {
-  padding: 42px 0 32px;
+  padding: 0 0 24px 0;
   text-align: left;
 }
 .toggle {

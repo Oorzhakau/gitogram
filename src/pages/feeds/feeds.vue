@@ -129,7 +129,7 @@ export default {
   }
   .feed {
     width: 980px;
-    margin-top: 265px;
+    margin-top: 300px;
     margin-left: auto;
     margin-right: auto;
     overflow: visible;
