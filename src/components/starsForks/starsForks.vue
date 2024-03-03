@@ -31,19 +31,19 @@ export default {
   props: {
     starCount: {
       type: String,
-      required: true
+      default: '0'
     },
     forkCount: {
       type: String,
-      required: true
+      default: '0'
     },
     activeStar: {
       type: Boolean,
-      required: true
+      default: false
     },
     activeFork: {
       type: Boolean,
-      required: true
+      default: false
     }
   },
   emits: ['updateStar', 'updateFork'],
@@ -60,19 +60,18 @@ export default {
 
 <style lang="scss" scoped>
   .btn-set {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     border: 1px solid rgba(0, 0, 0, 10%);
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-radius: 5px;
+    height: 30px;
   }
   button {
     height: 28px;
     background-color: #FAFBFC;
     cursor: pointer;
     padding: 0px 0px 0px 6px;
+    border-radius: 5px;
     &:active {
       background-color: #F0F0F0;
     }
@@ -99,12 +98,13 @@ export default {
     margin: 5px;
   }
   .middle, .end {
+    border-radius: 0px;
     border-right: 1px solid rgba(0, 0, 0, 10%);
     border-left: 1px solid rgba(0, 0, 0, 10%);
     min-width: 35px;
     height: 100%;
     text-align: center;
-    padding: 0px 5px;
+    padding: 2px 5px;
   }
   .end {
     border-right: none;
