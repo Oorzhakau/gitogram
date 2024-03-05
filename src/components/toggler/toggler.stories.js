@@ -5,7 +5,7 @@ export default {
   components: { toggler }
 }
 
-export const defaultView = () => ({
+export const DefaultView = () => ({
   components: {
     toggler
   },
@@ -14,6 +14,6 @@ export const defaultView = () => ({
   `
 })
 
-defaultView.story = {
+DefaultView.story = {
   name: 'Стандартный вид'
 }

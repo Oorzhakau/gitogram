@@ -5,7 +5,7 @@ export default {
   components: { comment }
 }
 
-export const defaultView = () => ({
+export const DefaultView = () => ({
   components: {
     comment
   },
@@ -17,6 +17,6 @@ export const defaultView = () => ({
   `
 })
 
-defaultView.story = {
+DefaultView.story = {
   name: 'Стандартный вид'
 }

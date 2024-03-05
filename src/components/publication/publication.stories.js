@@ -5,7 +5,7 @@ export default {
   components: { publication }
 }
 
-export const defaultView = () => ({
+export const DefaultView = () => ({
   components: {
     publication
   },
@@ -43,6 +43,6 @@ export const defaultView = () => ({
   `
 })
 
-defaultView.story = {
+DefaultView.story = {
   name: 'Стандартный вид'
 }

@@ -13,7 +13,7 @@ export default {
   decorators: [withKnobs]
 }
 
-export const defaultView = () => ({
+export const DefaultView = () => ({
   components: {
     starsForks
   },
@@ -44,11 +44,11 @@ export const defaultView = () => ({
   methods
 })
 
-defaultView.story = {
+DefaultView.story = {
   name: 'Стандартный вид'
 }
 
-export const activeView = () => ({
+export const ActiveView = () => ({
   components: {
     starsForks
   },
@@ -65,6 +65,6 @@ export const activeView = () => ({
   methods
 })
 
-defaultView.story = {
+DefaultView.story = {
   name: 'Активированный вид'
 }

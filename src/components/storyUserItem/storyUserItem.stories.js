@@ -7,7 +7,7 @@ export default {
   }
 }
 
-export const defaultView = () => ({
+export const DefaultView = () => ({
   components: {
     storyUserItem
   },

@@ -6,7 +6,7 @@ export default {
   components: { feedItem }
 }
 
-export const defaultView = () => ({
+export const DefaultView = () => ({
   components: {
     feedItem,
     publication
@@ -51,6 +51,6 @@ export const defaultView = () => ({
     `
 })
 
-defaultView.story = {
+DefaultView.story = {
   name: 'Стандартный вид'
 }

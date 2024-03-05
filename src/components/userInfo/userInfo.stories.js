@@ -5,7 +5,7 @@ export default {
   components: { userInfo }
 }
 
-export const defaultView = () => ({
+export const DefaultView = () => ({
   components: {
     userInfo
   },
@@ -18,11 +18,11 @@ export const defaultView = () => ({
   `
 })
 
-defaultView.story = {
+DefaultView.story = {
   name: 'Стандартный вид'
 }
 
-export const activeView = () => ({
+export const ActiveView = () => ({
   components: {
     userInfo
   },
@@ -36,6 +36,6 @@ export const activeView = () => ({
   `
 })
 
-activeView.story = {
+ActiveView.story = {
   name: 'Активированный вид'
 }

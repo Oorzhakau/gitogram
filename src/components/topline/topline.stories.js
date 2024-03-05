@@ -5,7 +5,7 @@ export default {
   components: { topline }
 }
 
-export const defaultView = () => ({
+export const DefaultView = () => ({
   components: {
     topline
   },
@@ -34,6 +34,6 @@ export const defaultView = () => ({
   `
 })
 
-defaultView.story = {
+DefaultView.story = {
   name: 'Стандартный вид'
 }

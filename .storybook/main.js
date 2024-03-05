@@ -8,7 +8,6 @@ const config = {
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
     "@storybook/addon-backgrounds",
-    '@storybook/addon-knobs',
     {
       name: '@storybook/addon-storysource',
       options: {
@@ -44,7 +43,7 @@ const config = {
     })
     config.module.rules.push({
       test: [/\.stories\.jsx?$/],
-      loader: require.resolve("@storybook/source-loader")
+        loader: require.resolve("@storybook/source-loader")
     })
     return config
   }

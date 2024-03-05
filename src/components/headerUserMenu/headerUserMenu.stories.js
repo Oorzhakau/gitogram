@@ -11,7 +11,7 @@ export default {
   components: { headerUserMenu }
 }
 
-export const defaultView = () => ({
+export const DefaultView = () => ({
   components: {
     headerUserMenu
   },
@@ -25,6 +25,6 @@ export const defaultView = () => ({
   methods
 })
 
-defaultView.story = {
+DefaultView.story = {
   name: 'Стандартный вид'
 }
