@@ -3,7 +3,7 @@
   <div class="feed">
     <ul class="feed-list">
       <li class="feed-item"
-        v-for="publication in feed"
+        v-for="publication in items"
         :key="publication.id"
 
       >
@@ -44,12 +44,12 @@
       </template>
       <template #content>
         <ul class="stories">
-          <li class="stories-item" v-for="story in stories" :key="story.id">
+          <li class="stories-item" v-for="story in items" :key="story.id">
             <story-user-item
-              :avatar="story.avatar"
-              :username="story.username"
-              :id="story.id"
-              @onPress="handlePress(story.id)"
+              :avatar="story.owner.avatar_url"
+              :username="story.owner.login"
+              :id="story.owner.id"
+              @onPress="handlePress(story.owner.id)"
             />
           </li>
         </ul>
@@ -65,8 +65,7 @@ import { storyUserItem } from '../../components/storyUserItem'
 import { headerUserMenu } from '../../components/headerUserMenu'
 import { feedItem } from '../../components/feed'
 import { publication } from '../../components/publication'
-import stories from './data.json'
-import feed from './feed.json'
+import * as api from '../../api'
 
 export default {
   name: 'feeds',
@@ -80,9 +79,8 @@ export default {
   },
   data () {
     return {
-      stories: stories,
-      feed: feed,
-      user: { username: 'john1990', id: '1234', avatar: 'https://loremflickr.com/300/300' }
+      user: { username: 'john1990', id: '1234', avatar: 'https://loremflickr.com/300/300' },
+      items: []
     }
   },
   methods: {
@@ -97,6 +95,14 @@ export default {
     },
     toggleFork (pub) {
       pub.activeFork = !pub.activeFork
+    }
+  },
+  async created () {
+    try {
+      const { data } = await api.trendings.getTrendings()
+      this.items = data.items
+    } catch (error) {
+      console.log(error)
     }
   }
 }
@@ -129,7 +135,7 @@ export default {
   }
   .feed {
     width: 980px;
-    margin-top: 265px;
+    margin-top: 300px;
     margin-left: auto;
     margin-right: auto;
     overflow: visible;

@@ -1,0 +1,95 @@
+:root {
+  --z-active-slide: 10;
+  --grey: #404040;
+  --green: #31AE54;
+  --lightGreen: #c1e7cc;
+  --borders: #D3D3D3;
+  --lightGrey: #9E9E9E;
+}
+
+*, *:after, *::before {
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #262626;
+  font-size: 14px;
+  line-height: 1.8;
+  overflow-y: scroll;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+@for $i from 1 through 6 {
+  h#{$i} {
+    margin: 0;
+    font-weight: normal;
+  }
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid transparent;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+svg {
+  display: block;
+}
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+
+.x-container {
+  max-width: 1200px;
+  width: 95%;
+  margin: 0 auto;
+}
+
+#app {
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  height: 100%;
+}

@@ -2,9 +2,9 @@
   <div class="c-feed">
     <div class="user-info">
       <user-info
-        :username="publication.author.username"
-        :avatar="publication.author.avatar"
-        :id="publication.author.id"
+        :username="publication.owner.login"
+        :avatar="publication.owner.avatar_url"
+        :id="publication.owner.id"
       />
     </div>
     <div class="content" v-if="$slots.content">
@@ -19,13 +19,13 @@
           v-for="pub in publication.comments" :key="pub.id"
         >
             <comment
-              :username="pub.author.username"
-              :text="pub.text"
+              :username="pub.owner.login"
+              :text="pub.description"
             />
         </li>
       </ul>
     </div>
-    <div class="date">{{ publication.date }}</div>
+    <div class="date">{{ fomateDate(publication.created_at) }}</div>
   </div>
 </template>
 
@@ -33,6 +33,7 @@
 import { comment } from '../comment'
 import { toggler } from '../toggler'
 import { userInfo } from '../userInfo'
+import * as api from '../../api'
 
 export default {
   name: 'feed-item',
@@ -59,6 +60,9 @@ export default {
     },
     handlerToggle (isOpened) {
       this.shown = isOpened
+    },
+    fomateDate (date) {
+      return api.helpers.formatDate(date)
     }
   }
 }
@@ -66,7 +70,7 @@ export default {
 
 <style lang="scss" scoped>
 .c-feed {
-  padding: 42px 0 32px;
+  padding: 0 0 24px 0;
   text-align: left;
 }
 .toggle {

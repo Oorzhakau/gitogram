@@ -11,8 +11,8 @@
       <stars-forks
         @updateStar="toggleStar"
         @updateFork="toggleFork"
-        :starCount="publication.stars"
-        :forkCount="publication.forks"
+        :starCount="publication.stargazers_count"
+        :forkCount="publication.forks_count"
         :activeStar="publication.activeStar"
         :activeFork="publication.activeFork"
       />
