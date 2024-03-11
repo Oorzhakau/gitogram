@@ -3,7 +3,7 @@
   <div class="feed">
     <ul class="feed-list">
       <li class="feed-item"
-        v-for="publication in items"
+        v-for="publication in trendings.data.items"
         :key="publication.id"
       >
         <feed-item
@@ -19,7 +19,6 @@
         </feed-item>
       </li>
     </ul>
-    <h1> {{ $store.state.foo }}</h1>
   </div>
   <div class="topline">
     <topline>
@@ -113,12 +112,10 @@ export default {
       })
     }
   },
-  async created () {
+  async mounted () {
     try {
       await this.fetchTrendings()
       console.log(this.$state)
-      const { data } = this.trendings
-      this.items = data.items
     } catch (error) {
       console.log(error)
     }
