@@ -7,9 +7,10 @@
 <script>
 export default {
   name: 'xProgress',
-  data () {
-    return {
-      active: false
+  props: {
+    active: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ['onFinish'],
@@ -21,10 +22,9 @@ export default {
   mounted () {
     this.$nextTick(() => {
       setTimeout(() => {
-        this.active = true
+        return this.active
       }, 100)
     })
-
     this.$refs.indicator.addEventListener('transitionend', this.emitOnFinish)
   },
   beforeUnmount () {
@@ -44,6 +44,7 @@ export default {
     &.active {
         .indicator {
             width: 100%;
+            transition: 5s;
         }
     }
   }
@@ -55,6 +56,5 @@ export default {
     bottom: 0;
     width: 0;
     background: var(--green);
-    transition: 5s;
   }
 </style>

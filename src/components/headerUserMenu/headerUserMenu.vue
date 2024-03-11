@@ -1,11 +1,15 @@
 <template>
   <div class="x-container">
-      <div class="icon" @click="$emit('homePage', 'args')">
-        <icon name="home"/>
-      </div>
-      <div class="avatar">
-        <img :src="avatar" class="img" alt="username avatar"/>
-      </div>
+        <div class="icon" @click="$emit('homePage', 'args')">
+          <router-link :to="{name: 'user', params: {id: id}}">
+            <icon name="home"/>
+          </router-link>
+        </div>
+        <div class="avatar">
+          <router-link :to="{name: 'user', params: {id: id}}">
+            <img :src="avatar" class="img" alt="username avatar"/>
+          </router-link>
+        </div>
       <div class="icon" @click="$emit('signOut', 'args')">
         <icon name="signout"/>
       </div>

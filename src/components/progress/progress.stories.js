@@ -7,6 +7,9 @@ export default {
     onFinish: {
       action: 'onFinish',
       description: 'fires when progres reaches the end'
+    },
+    active: {
+      control: 'boolean'
     }
   }
 }
@@ -17,7 +20,7 @@ export const DefaultView = (args) => ({
     return { args }
   },
   template: `
-    <x-progress @onFinish="args.onFinish" />
+    <x-progress @onFinish="args.onFinish" :active="args.active"/>
     `
 })
 

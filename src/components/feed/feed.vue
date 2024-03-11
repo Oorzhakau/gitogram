@@ -1,11 +1,13 @@
 <template>
   <div class="c-feed">
     <div class="user-info">
-      <user-info
-        :username="publication.owner.login"
-        :avatar="publication.owner.avatar_url"
-        :id="publication.owner.id"
-      />
+      <router-link :to="{name: 'user', params: {id: publication.owner.id}}">
+        <user-info
+          :username="publication.owner.login"
+          :avatar="publication.owner.avatar_url"
+          :id="publication.owner.id"
+        />
+      </router-link>
     </div>
     <div class="content" v-if="$slots.content">
       <slot name="content"></slot>
@@ -20,6 +22,7 @@
         >
             <comment
               :username="pub.owner.login"
+              :userId="pub.owner.id"
               :text="pub.description"
             />
         </li>

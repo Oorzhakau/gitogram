@@ -5,7 +5,6 @@
       <li class="feed-item"
         v-for="publication in items"
         :key="publication.id"
-
       >
         <feed-item
           :publication="publication"
@@ -20,6 +19,7 @@
         </feed-item>
       </li>
     </ul>
+    <h1> {{ $store.state.foo }}</h1>
   </div>
   <div class="topline">
     <topline>
@@ -44,12 +44,13 @@
       </template>
       <template #content>
         <ul class="stories">
-          <li class="stories-item" v-for="story in items" :key="story.id">
+          <li class="stories-item" v-for="story in trendings.data.items" :key="story.id">
             <story-user-item
               :avatar="story.owner.avatar_url"
               :username="story.owner.login"
               :id="story.owner.id"
               @onPress="handlePress(story.owner.id)"
+              @storyPress="$router.push({name: 'stories', params: {initialSlide: story.id}})"
             />
           </li>
         </ul>
@@ -59,13 +60,13 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import { topline } from '../../components/topline'
 import { icon } from '../../icons'
 import { storyUserItem } from '../../components/storyUserItem'
 import { headerUserMenu } from '../../components/headerUserMenu'
 import { feedItem } from '../../components/feed'
 import { publication } from '../../components/publication'
-import * as api from '../../api'
 
 export default {
   name: 'feeds',
@@ -79,11 +80,18 @@ export default {
   },
   data () {
     return {
-      user: { username: 'john1990', id: '1234', avatar: 'https://loremflickr.com/300/300' },
-      items: []
+      user: { username: 'john1990', id: '1234', avatar: 'https://loremflickr.com/300/300' }
     }
   },
+  computed: {
+    ...mapState({
+      trendings: state => state.trendings
+    })
+  },
   methods: {
+    ...mapActions({
+      fetchTrendings: 'trendings/fetchTrendings'
+    }),
     handlePress (userId) {
       console.log('userId=' + userId)
     },
@@ -95,11 +103,21 @@ export default {
     },
     toggleFork (pub) {
       pub.activeFork = !pub.activeFork
+    },
+    goToUser (user) {
+      this.$router.push({
+        name: 'user',
+        params: {
+          id: user.id
+        }
+      })
     }
   },
   async created () {
     try {
-      const { data } = await api.trendings.getTrendings()
+      await this.fetchTrendings()
+      console.log(this.$state)
+      const { data } = this.trendings
       this.items = data.items
     } catch (error) {
       console.log(error)
@@ -131,7 +149,12 @@ export default {
   }
   .stories {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+  }
+  .stories-item {
+    flex: 1;
+    min-width: 100px;
   }
   .feed {
     width: 980px;

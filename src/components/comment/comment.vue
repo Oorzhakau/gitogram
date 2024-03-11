@@ -1,7 +1,7 @@
 <template>
   <div class="c-comment">
     <p>
-      <span class="username">{{ username }}</span>
+        <router-link :to="{name: 'user', params: {id: id}}"><span class="username">{{ username }}</span></router-link>
       {{ text }}
     </p>
   </div>
@@ -12,6 +12,10 @@ export default {
   name: 'comment',
   props: {
     username: {
+      type: String,
+      required: true
+    },
+    userId: {
       type: String,
       required: true
     },

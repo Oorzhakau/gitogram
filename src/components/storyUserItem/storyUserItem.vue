@@ -1,5 +1,5 @@
 <template>
-  <button class="c-story-user-item" @click="onPress">
+  <button class="c-story-user-item" @click="storyPress">
     <div class="avatar">
       <img :src="avatar" class="img" alt="username avatar"/>
     </div>
@@ -23,10 +23,10 @@ export default {
       required: true
     }
   },
-  emits: ['onPress'],
+  emits: ['storyPress'],
   methods: {
-    onPress (id) {
-      this.$emit('onPress')
+    storyPress (id) {
+      this.$emit('storyPress', id)
     }
   }
 }
