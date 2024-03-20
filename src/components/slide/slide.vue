@@ -24,7 +24,10 @@
       </div>
       <div class="button-wrapper">
         <div class="button-size">
-          <x-button :active="follow"/>
+          <x-button
+            @click="$emit('onFollow', data.id)"
+            :active="follow"
+          />
         </div>
       </div>
     </div>
@@ -69,7 +72,7 @@ export default {
     placeholder,
     icon
   },
-  emits: ['onNextSlide', 'onPrevSlide', 'onProgressFinish'],
+  emits: ['onNextSlide', 'onPrevSlide', 'onProgressFinish', 'onFollow'],
   props: {
     active: Boolean,
     loading: Boolean,

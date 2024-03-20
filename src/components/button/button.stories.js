@@ -11,10 +11,14 @@ export default {
   argTypes: {
     active: {
       control: { type: 'boolean' }
+    },
+    loading: {
+      control: { type: 'boolean' }
     }
   },
   args: {
-    active: true
+    active: true,
+    loading: false
   }
 }
 
@@ -30,6 +34,7 @@ export const DefaultView = (args) => ({
   template: `
     <x-button
       :active="args.active"
+      :loading="args.loading"
       @follow="onFollow"
     />
   `,

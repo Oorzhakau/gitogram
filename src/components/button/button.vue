@@ -6,19 +6,27 @@
       ]"
     @click="follow"
     >
-    <span class="text">
-      {{ active ? "follow" : "unfollow" }}
-    </span>
+    <div class="text">
+      <p v-if="!loading">{{ active ? "follow" : "unfollow" }}</p>
+      <div class="spinner-container" v-else>
+        <spinner />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { spinner } from '../spinner'
 export default {
   name: 'xButton',
+  components: {
+    spinner
+  },
   props: {
     active: {
       type: Boolean
-    }
+    },
+    loading: Boolean
   },
   emits: ['follow'],
   methods: {
@@ -33,6 +41,7 @@ export default {
   .c-button {
     display: block;
     max-width: 300px;
+    height: 44px;
     text-align: center;
     border-radius: 5px;
     padding: 7px 0px;
@@ -47,5 +56,11 @@ export default {
   }
   .active {
     background-color: var(--green);
+  }
+  .spinner-container {
+    width: 30px;
+    text-align: center;
+    margin: 0 auto;
+    color: #FFF;
   }
 </style>

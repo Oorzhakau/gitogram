@@ -15,7 +15,16 @@ export default {
   },
   mutations: {
     setTrendings (state, payload) {
-      state.data = payload
+      state.data = payload.map(
+        item => {
+          item.following = {
+            status: false,
+            loading: false,
+            error: ''
+          }
+          return item
+        }
+      )
     },
     setTredindLoading (state, payload) {
       state.loading = payload
@@ -38,6 +47,17 @@ export default {
     },
     setReadMeError (state, payload) {
       state.error = payload
+    },
+    setFollowing (state, payload) {
+      state.data = state.data.map((repo) => {
+        if (payload.id === repo.id) {
+          repo.following = {
+            ...repo.following,
+            ...payload.data
+          }
+        }
+        return repo
+      })
     }
   },
   actions: {
@@ -67,5 +87,16 @@ export default {
         commit('setReadMeLoading', false)
       }
     }
+    // async starRepo ({ commit, getters }, id) {
+    //   getters.getRepoById(id)
+    //   commit('setFollowing', {
+    //     id,
+    //     data: {
+    //       status: false,
+    //       loading: true,
+    //       error: ''
+    //     }
+    //   })
+    // }
   }
 }

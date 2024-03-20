@@ -33,6 +33,7 @@ Default.args = {
     username: 'Ivan',
     avatar: 'https://loremflickr.com/300/300',
     id: 5,
-    follow: false
+    follow: false,
+    initialSlide: 0
   }
 }

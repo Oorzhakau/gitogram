@@ -1,3 +1,4 @@
+import { auth } from '../pages/auth'
 import { feeds } from '../pages/feeds'
 import { stories } from '../pages/stories'
 import { profile } from '../pages/profile'
@@ -12,16 +13,26 @@ export default [
     name: 'feed'
   },
   {
+    path: '/auth',
+    component: auth,
+    name: 'auth'
+  },
+  {
     path: '/stories/:initialSlide(\\d+)',
     component: stories,
     name: 'stories'
   },
   {
-    path: '/user/:id(\\d+)',
+    path: '/user',
     component: user,
     name: 'user',
     props: true,
     children: [
+      {
+        path: '/:id(\\d+)',
+        name: 'user',
+        component: user
+      },
       {
         path: 'profile',
         name: 'profile',
