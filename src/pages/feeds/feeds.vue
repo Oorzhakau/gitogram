@@ -3,17 +3,24 @@
   <div class="feed">
     <ul class="feed-list">
       <li class="feed-item"
-        v-for="publication in trendings.data.items"
+        v-for="publication in starred"
         :key="publication.id"
-      >
+      ><!--getUnstarredOnly-->
         <feed-item
           :publication="publication"
+          @loadIssues="fetchIssues(
+                {
+                  id: publication.id,
+                  owner: publication.owner.login,
+                  repo: publication.name
+                 })"
         >
           <template #content>
             <publication
               :publication="publication"
               @updateStar="toggleStar(publication)"
               @updateFork="toggleFork(publication)"
+
             />
           </template>
         </feed-item>
@@ -32,8 +39,8 @@
             </div>
           </div>
           <div class="topline__col">
-            <header-user-menu
-              :avatar="user.avatar"
+            <header-user-menu v-if="user"
+              :avatar="user.avatar_url"
               :id="user.id"
               @signOut="handlePress(story.id)"
               @home="handlePress(story.id)"
@@ -43,7 +50,7 @@
       </template>
       <template #content>
         <ul class="stories">
-          <li class="stories-item" v-for="story in trendings.data.items" :key="story.id">
+          <li class="stories-item" v-for="story in starred" :key="story.id"> <!-- getUnstarredOnly-->
             <story-user-item
               :avatar="story.owner.avatar_url"
               :username="story.owner.login"
@@ -59,7 +66,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import { topline } from '../../components/topline'
 import { icon } from '../../icons'
 import { storyUserItem } from '../../components/storyUserItem'
@@ -77,19 +84,22 @@ export default {
     feedItem,
     publication
   },
-  data () {
-    return {
-      user: { username: 'john1990', id: '1234', avatar: 'https://loremflickr.com/300/300' }
-    }
-  },
   computed: {
     ...mapState({
-      trendings: state => state.trendings
-    })
+      trendings: state => state.trendings,
+      starred: state => state.starred.data,
+      user: state => state.auth.user
+    }),
+    ...mapGetters(['getUnstarredOnly'])
   },
   methods: {
     ...mapActions({
-      fetchTrendings: 'trendings/fetchTrendings'
+      fetchTrendings: 'trendings/fetchTrendings',
+      fetchStarred: 'starred/fetchStarred',
+      fetchIssues: 'starred/fetchIssues',
+      getUser: 'auth/getUser',
+      starRepo: 'trendings/starRepo',
+      unStarRepo: 'trendings/unStarRepo'
     }),
     handlePress (userId) {
       console.log('userId=' + userId)
@@ -97,7 +107,12 @@ export default {
     handlerToggle (feedItemId) {
       console.log('feedItemId=' + feedItemId)
     },
-    toggleStar (pub) {
+    async toggleStar (pub) {
+      // if (pub.activeStar) {
+      //   await this.unStarRepo(pub.id)
+      // } else {
+      //   await this.starRepo(pub.id)
+      // }
       pub.activeStar = !pub.activeStar
     },
     toggleFork (pub) {
@@ -112,12 +127,18 @@ export default {
       })
     }
   },
+  async created () {
+    if (!this.user) {
+      await this.getUser()
+    }
+  },
   async mounted () {
     try {
       await this.fetchTrendings()
-      console.log(this.$state)
+      await this.fetchStarred()
     } catch (error) {
       console.log(error)
+      throw error
     }
   }
 }
@@ -146,8 +167,9 @@ export default {
   }
   .stories {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: no-wrap;
     justify-content: space-between;
+    overflow-x: hidden;
   }
   .stories-item {
     flex: 1;

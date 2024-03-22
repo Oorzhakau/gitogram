@@ -14,7 +14,7 @@ export default {
   name: 'user-info',
   props: {
     id: {
-      type: String,
+      type: Number,
       required: true
     },
     username: {
@@ -26,8 +26,7 @@ export default {
       required: true
     },
     active: {
-      type: Boolean,
-      required: true
+      type: Boolean
     }
   }
 }

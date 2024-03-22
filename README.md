@@ -8,6 +8,10 @@
 ```
 yarn install
 ```
+### Init .env file (example in .env_example)
+```
+cp .env_example .env
+```
 
 ### Compiles and hot-reloads for development
 ```

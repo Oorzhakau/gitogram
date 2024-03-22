@@ -13,7 +13,7 @@
         @updateFork="toggleFork"
         :starCount="publication.stargazers_count"
         :forkCount="publication.forks_count"
-        :activeStar="publication.activeStar"
+        :activeStar="publication.following?.status"
         :activeFork="publication.activeFork"
       />
     </div>

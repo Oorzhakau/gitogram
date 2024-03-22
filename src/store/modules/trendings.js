@@ -1,4 +1,5 @@
 import * as api from '../../api'
+import actions from './actions'
 
 export default {
   namespaced: true,
@@ -15,16 +16,15 @@ export default {
   },
   mutations: {
     setTrendings (state, payload) {
-      state.data = payload.map(
-        item => {
-          item.following = {
-            status: false,
-            loading: false,
-            error: ''
-          }
-          return item
+      payload.items.map(item => {
+        item.following = {
+          status: false,
+          loading: false,
+          error: ''
         }
-      )
+        return item
+      })
+      state.data = payload
     },
     setTredindLoading (state, payload) {
       state.loading = payload
@@ -49,7 +49,7 @@ export default {
       state.error = payload
     },
     setFollowing (state, payload) {
-      state.data = state.data.map((repo) => {
+      state.data.items = state.data.items.map((repo) => {
         if (payload.id === repo.id) {
           repo.following = {
             ...repo.following,
@@ -77,7 +77,6 @@ export default {
       if (currRepo.readme !== undefined) return
       commit('setReadMeLoading', true)
       try {
-        console.log('FETCH README', repo)
         const { data } = await api.repos.getReadMe(owner, repo)
         commit('setReadMe', { id, content: data })
       } catch (error) {
@@ -86,17 +85,7 @@ export default {
       } finally {
         commit('setReadMeLoading', false)
       }
-    }
-    // async starRepo ({ commit, getters }, id) {
-    //   getters.getRepoById(id)
-    //   commit('setFollowing', {
-    //     id,
-    //     data: {
-    //       status: false,
-    //       loading: true,
-    //       error: ''
-    //     }
-    //   })
-    // }
+    },
+    ...actions
   }
 }

@@ -38,11 +38,15 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+@import "../../css/base.scss";
+
 .wrapper {
   height: 100vh;
   width: 100wh;
   background: black;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .x-container {
   height: 100%;
@@ -52,8 +56,7 @@ export default {
 }
 .header {
   padding-top: 45px;
-  position: fixed;
-  display: flex;
+  padding-bottom: 20px;
   width: 100%;
 }
 
@@ -74,10 +77,9 @@ export default {
 }
 
 .content {
-  height: 680px;
-  margin-top: 150px;
+  height: 80%;
   display: flex;
   justify-content: space-between;
-  align-items: center
+  align-items: flex-end;
 }
 </style>

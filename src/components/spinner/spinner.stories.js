@@ -2,7 +2,15 @@ import spinner from './spinner.vue'
 
 export default {
   title: 'spinner',
-  component: { spinner }
+  component: { spinner },
+  argTypes: {
+    theme: {
+      control: { type: 'text', default: 'green' }
+    }
+  },
+  args: {
+    theme: 'green'
+  }
 }
 
 const template = (args) => ({
@@ -12,7 +20,7 @@ const template = (args) => ({
   data () {
     return { args }
   },
-  template: '<spinner/>'
+  template: '<spinner :theme="args.theme"/>'
 })
 
 export const Default = template.bind({})

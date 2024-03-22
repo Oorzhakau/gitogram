@@ -8,6 +8,12 @@
   --hightlightGrey: #DEDEDE;
 }
 
+$notebooks: 992px;
+$tablets: 768px;
+$phones: 480px;
+
+@import "./media";
+
 *, *:after, *::before {
   box-sizing: border-box;
 }

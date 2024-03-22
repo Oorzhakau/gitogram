@@ -25,9 +25,11 @@
       <div class="button-wrapper">
         <div class="button-size">
           <x-button
-            @click="$emit('onFollow', data.id)"
+            :theme="data.following.status ? 'grey' : 'green'"
+            :loading="data.following.loading"
+            @click="$emit(data.following.status ? 'onUnFollow': 'onFollow', data.id)"
             :active="follow"
-          />
+          >{{ data.following.status ? 'unfollow': 'follow' }}</x-button>
         </div>
       </div>
     </div>
@@ -72,7 +74,7 @@ export default {
     placeholder,
     icon
   },
-  emits: ['onNextSlide', 'onPrevSlide', 'onProgressFinish', 'onFollow'],
+  emits: ['onNextSlide', 'onPrevSlide', 'onProgressFinish', 'onFollow', 'onUnFollow'],
   props: {
     active: Boolean,
     loading: Boolean,
@@ -106,7 +108,7 @@ export default {
 
 .stories-container {
     width: 375px;
-    height: 667px;
+    height: 70vh;
     display: flex;
     flex-direction: column;
     border-radius: 8px;
@@ -121,6 +123,7 @@ export default {
       margin: auto;
     }
     &.active {
+      height: 80vh;
       transform: scale(1);
       .button-size {
         width: 270px;

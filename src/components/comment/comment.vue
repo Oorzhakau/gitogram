@@ -16,7 +16,7 @@ export default {
       required: true
     },
     userId: {
-      type: String,
+      type: Number,
       required: true
     },
     text: {

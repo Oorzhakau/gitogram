@@ -1,24 +1,23 @@
 import xButton from './button.vue'
-import { action } from '@storybook/addon-actions'
-
-const methods = {
-  onFollow: action('follow')
-}
 
 export default {
   title: 'xButton',
   components: { xButton },
   argTypes: {
-    active: {
-      control: { type: 'boolean' }
+    theme: {
+      control: { type: 'text', default: 'green' }
     },
     loading: {
       control: { type: 'boolean' }
+    },
+    text: {
+      control: { type: 'text', default: 'follow' }
     }
   },
   args: {
-    active: true,
-    loading: false
+    theme: 'green',
+    loading: false,
+    text: 'follow'
   }
 }
 
@@ -33,12 +32,11 @@ export const DefaultView = (args) => ({
   },
   template: `
     <x-button
-      :active="args.active"
+      :theme="args.theme"
       :loading="args.loading"
       @follow="onFollow"
-    />
-  `,
-  methods
+    >{{args.text}}</x-button>
+  `
 })
 
 DefaultView.story = {

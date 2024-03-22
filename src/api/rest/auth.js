@@ -1,5 +1,14 @@
 import { makeRequest } from '../requests'
 
+export const getCode = () => {
+  const githubApi = 'https://github.com/login/oauth/authorize'
+
+  const params = new URLSearchParams()
+
+  params.append('client_id', process.env.VUE_APP_CLIENT_ID)
+  window.location.href = `${githubApi}?${params}`
+}
+
 export const getAuthToken = (code) => {
   const url = 'https://webdev-api.loftschool.com/github'
 
@@ -18,12 +27,7 @@ export const getAuthToken = (code) => {
 }
 
 export const getUser = () => {
-  const url = 'https://api.github.com/user'
+  const url = '/user'
 
-  return makeRequest({
-    url,
-    headers: {
-      Authorization: `token ${localStorage.getItem('token')}`
-    }
-  })
+  return makeRequest({ url })
 }

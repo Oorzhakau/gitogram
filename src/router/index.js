@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import routers from './routers'
+import * as api from '../api'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -8,23 +9,14 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const authRoute = to.name === 'auth'
-  if (authRoute) {
-    next()
-    return
-  }
 
   try {
-    const response = await fetch('https://api.github.com/user', {
-      headers: {
-        Authorization: `token ${localStorage.getItem('token')}`
-      }
-    })
-
-    if (response.status === 401) throw new Error()
-
-    next()
+    await api.auth.getUser()
+    next(authRoute ? { name: 'feeds' } : null)
   } catch (error) {
-    next({ name: 'auth' })
+    if (error.response.status === 401) {
+      next(authRoute ? null : { name: 'auth' })
+    }
   }
 })
 

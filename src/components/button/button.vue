@@ -1,15 +1,12 @@
 <template>
   <div
-    :class="[
-      'c-button',
-      {'active': active}
-      ]"
+    :class="['c-button', `${theme}`]"
     @click="follow"
     >
     <div class="text">
-      <p v-if="!loading">{{ active ? "follow" : "unfollow" }}</p>
+      <p v-if="!loading"><slot></slot></p>
       <div class="spinner-container" v-else>
-        <spinner />
+        <spinner theme="white"/>
       </div>
     </div>
   </div>
@@ -23,15 +20,12 @@ export default {
     spinner
   },
   props: {
-    active: {
-      type: Boolean
+    theme: {
+      type: String
     },
-    loading: Boolean
-  },
-  emits: ['follow'],
-  methods: {
-    follow () {
-      this.$emit('follow', this.active)
+
+    loading: {
+      type: Boolean
     }
   }
 }
@@ -54,7 +48,7 @@ export default {
     font-weight: bold;
     color: #FFF;
   }
-  .active {
+  .green {
     background-color: var(--green);
   }
   .spinner-container {

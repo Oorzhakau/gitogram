@@ -30,12 +30,12 @@ export default {
   },
   props: {
     starCount: {
-      type: String,
-      default: '0'
+      type: Number,
+      default: 0
     },
     forkCount: {
-      type: String,
-      default: '0'
+      type: Number,
+      default: 0
     },
     activeStar: {
       type: Boolean,

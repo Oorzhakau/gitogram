@@ -10,7 +10,7 @@ export default [
   {
     path: '/',
     component: feeds,
-    name: 'feed'
+    name: 'feeds'
   },
   {
     path: '/auth',

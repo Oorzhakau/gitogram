@@ -10,13 +10,14 @@
             <img :src="avatar" class="img" alt="username avatar"/>
           </router-link>
         </div>
-      <div class="icon" @click="$emit('signOut', 'args')">
+      <div class="icon" @click="logout">
         <icon name="signout"/>
       </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { icon } from '../../icons'
 
 export default {
@@ -25,7 +26,7 @@ export default {
   },
   props: {
     id: {
-      type: String,
+      type: Number,
       required: true
     },
     avatar: {
@@ -35,9 +36,9 @@ export default {
   },
   emits: ['homePage', 'signOut'],
   methods: {
-    onPress (id) {
-      this.$emit('onPress')
-    }
+    ...mapActions({
+      logout: 'auth/logout'
+    })
   }
 }
 </script>

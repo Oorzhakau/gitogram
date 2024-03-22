@@ -18,12 +18,12 @@
     <div class="comments" v-if="shown">
       <ul class="comments-list">
         <li class="comments-item"
-          v-for="pub in publication.comments" :key="pub.id"
+          v-for="pub in publication.issues?.data" :key="pub.id"
         >
             <comment
-              :username="pub.owner.login"
-              :userId="pub.owner.id"
-              :text="pub.description"
+              :username="pub.user.login"
+              :userId="pub.user.id"
+              :text="pub.body"
             />
         </li>
       </ul>
@@ -63,6 +63,10 @@ export default {
     },
     handlerToggle (isOpened) {
       this.shown = isOpened
+      if (this.shown && !this.publication.issues) {
+        this.$emit('loadIssues')
+        console.log('loadIssues')
+      }
     },
     fomateDate (date) {
       return api.helpers.formatDate(date)
