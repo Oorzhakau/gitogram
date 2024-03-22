@@ -50,7 +50,7 @@
       </template>
       <template #content>
         <ul class="stories">
-          <li class="stories-item" v-for="story in starred" :key="story.id"> <!-- getUnstarredOnly-->
+          <li class="stories-item" v-for="story in getUnstarredOnly" :key="story.id"> <!-- getUnstarredOnly-->
             <story-user-item
               :avatar="story.owner.avatar_url"
               :username="story.owner.login"
