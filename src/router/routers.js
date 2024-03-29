@@ -4,6 +4,8 @@ import { stories } from '../pages/stories'
 import { profile } from '../pages/profile'
 import { history } from '../pages/history'
 import { notFound } from '../pages/not-found'
+import { following } from '../pages/following'
+import { repos } from '../pages/repos'
 const user = () => import('../pages/user/user.vue')
 
 export default [
@@ -21,6 +23,16 @@ export default [
     path: '/stories/:initialSlide(\\d+)',
     component: stories,
     name: 'stories'
+  },
+  {
+    path: '/following',
+    component: following,
+    name: 'following'
+  },
+  {
+    path: '/repos',
+    component: repos,
+    name: 'repos'
   },
   {
     path: '/user',

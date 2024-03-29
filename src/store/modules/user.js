@@ -1,33 +1,74 @@
-import * as api from '../../api'
+import axios from 'axios'
 
 export default {
   namespaced: true,
   state: {
-    user: {
-      data: {},
-      loading: false,
-      active: false,
-      error: false
-    }
-  },
-  getters: {
-    getSeniors (state) {
-      return state.users.filter(user => user.status === 'senior')
-    }
+    data: {}
   },
   mutations: {
+    set_user: (state, payload) => {
+      state.data = payload
+    },
+    set_following: (state, payload) => {
+      state.data = payload
+    },
+    set_repos: (state, payload) => {
+      state.data = payload
+    }
   },
   actions: {
-    async getTrendings (state) {
-      state.commit('setTredindLoading', true)
+    async getUser ({ commit }) {
+      const token = localStorage.getItem('token')
       try {
-        const { data } = await api.trendings.getTrendings()
+        const { data } = await axios.get(
+          'https://api.github.com/user',
+          {
+            headers: {
+              Authorization: `token ${token}`
+            }
+          }
+        )
+        commit('set_user', data)
         console.log(data)
-        state.commit('settrendings', data)
-      } catch (error) {
-        state.commit('setTredindError', 'Не удалось загрузить данные по трендам')
-      } finally {
-        state.commit('setTredindLoading', false)
+      } catch (e) {
+        console.log(e)
+        throw e
+      }
+    },
+    async getUserFollowing ({ commit }) {
+      const token = localStorage.getItem('token')
+      try {
+        const { data } = await axios.get(
+          'https://api.github.com/user/following',
+          {
+            headers: {
+              Authorization: `token ${token}`
+            }
+          }
+        )
+        commit('set_following', data)
+        console.log(data)
+      } catch (e) {
+        console.log(e)
+        throw e
+      }
+    },
+    async getUserRepos ({ commit }) {
+      const token = localStorage.getItem('token')
+      try {
+        const { data } = await axios.get(
+          'https://api.github.com/user/repos',
+          {
+            headers: {
+              Authorization: `token ${token}`
+            }
+          }
+        )
+        commit('set_repos', data)
+        console.log(data)
+      } catch (e) {
+        console.log(e)
+        throw e
       }
     }
   }

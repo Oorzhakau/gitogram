@@ -12,29 +12,13 @@
     <div class="content" v-if="$slots.content">
       <slot name="content"></slot>
     </div>
-    <div class="toggle">
-      <toggler @onToggle="handlerToggle"/>
-    </div>
-    <div class="comments" v-if="shown">
-      <ul class="comments-list">
-        <li class="comments-item"
-          v-for="pub in publication.issues?.data" :key="pub.id"
-        >
-            <comment
-              :username="pub.user.login"
-              :userId="pub.user.id"
-              :text="pub.body"
-            />
-        </li>
-      </ul>
-    </div>
+    <issues :issues="publication.issues?.data" @loadContent="handlerToggle"/>
     <div class="date">{{ fomateDate(publication.created_at) }}</div>
   </div>
 </template>
 
 <script>
-import { comment } from '../comment'
-import { toggler } from '../toggler'
+import { issues } from '../issues'
 import { userInfo } from '../userInfo'
 import * as api from '../../api'
 
@@ -52,8 +36,7 @@ export default {
     }
   },
   components: {
-    toggler,
-    comment,
+    issues,
     userInfo
   },
   emits: ['homePage', 'signOut'],
@@ -65,7 +48,6 @@ export default {
       this.shown = isOpened
       if (this.shown && !this.publication.issues) {
         this.$emit('loadIssues')
-        console.log('loadIssues')
       }
     },
     fomateDate (date) {

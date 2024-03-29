@@ -3,6 +3,8 @@ import auth from './modules/auth'
 import trendings from './modules/trendings'
 import starred from './modules/starred'
 import user from './modules/user'
+import repos from './modules/repos'
+import followings from './modules/following'
 
 export default createStore({
   getters: {
@@ -19,6 +21,8 @@ export default createStore({
     auth,
     trendings,
     starred,
-    user
+    user,
+    repos,
+    followings
   }
 })

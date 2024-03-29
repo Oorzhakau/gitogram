@@ -50,7 +50,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 980px;
+    width: 100%;
     border-radius: 10px;
     padding: 15px 20px;
     background-color: #FFFF;

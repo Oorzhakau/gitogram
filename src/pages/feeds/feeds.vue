@@ -5,7 +5,7 @@
       <li class="feed-item"
         v-for="publication in starred"
         :key="publication.id"
-      ><!--getUnstarredOnly-->
+      >
         <feed-item
           :publication="publication"
           @loadIssues="fetchIssues(
@@ -108,11 +108,6 @@ export default {
       console.log('feedItemId=' + feedItemId)
     },
     async toggleStar (pub) {
-      // if (pub.activeStar) {
-      //   await this.unStarRepo(pub.id)
-      // } else {
-      //   await this.starRepo(pub.id)
-      // }
       pub.activeStar = !pub.activeStar
     },
     toggleFork (pub) {
